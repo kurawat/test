@@ -1,0 +1,3098 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "NHS SBS SSC Suppliers API",
+    "description" : "This is NHS SBS SSC Suppliers API",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/NHS-SBS/NHS_SBS_SSC_Suppliers_API/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "https://apigw-dev.sbs.nhs.uk/rest/SSC/suppliers/v1",
+    "description" : "NHS SBS APIGW Sandbox"
+  } ],
+  "security" : [ {
+    "application" : [ ]
+  } ],
+  "tags" : [ {
+    "name" : "Supplier",
+    "description" : "Supplier Operations"
+  }, {
+    "name" : "Supplier Address",
+    "description" : "Supplier Address Operations"
+  }, {
+    "name" : "Supplier Address Tax Profile",
+    "description" : "Supplier Address Tax Profile Operations"
+  }, {
+    "name" : "Supplier Contact",
+    "description" : "Supplier Contact Operations"
+  }, {
+    "name" : "Supplier Contact Address",
+    "description" : "Supplier Contact Address Operations"
+  }, {
+    "name" : "Supplier Profile",
+    "description" : "Supplier Profile Operations"
+  }, {
+    "name" : "Supplier Site",
+    "description" : "Supplier Site Operations"
+  }, {
+    "name" : "Supplier Site Bank Detail",
+    "description" : "Supplier Site Bank Detail Operations"
+  }, {
+    "name" : "Supplier Site Payment",
+    "description" : "Supplier Site Payment Operations"
+  }, {
+    "name" : "Supplier Tax Profile",
+    "description" : "Supplier Tax Profile Operations"
+  }, {
+    "name" : "Supplier Transaction",
+    "description" : "Supplier Transaction Operations"
+  } ],
+  "paths" : {
+    "/supplier/{SupplierId}" : {
+      "get" : {
+        "tags" : [ "Supplier" ],
+        "summary" : "Get Supplier",
+        "description" : "Get Supplier profile, address(es), contact(s), site(s) record(s)",
+        "operationId" : "getSupplier",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "fields",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplier-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier" : {
+      "post" : {
+        "tags" : [ "Supplier" ],
+        "summary" : "Create Supplier",
+        "description" : "Create new Supplier Profile, Address(es), Contact(s), Site(s) and associated bank account(s)",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SupplierService-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SupplierService-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice" : {
+      "get" : {
+        "tags" : [ "Supplier Transaction" ],
+        "summary" : "Get Invoices",
+        "description" : "Get payables invoices",
+        "operationId" : "getInvoices",
+        "parameters" : [ {
+          "name" : "q",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "frameworkVersion",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "orderBy",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "fields",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetInvoices-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}/bankAccount/{PaymentInstrumentAssignmentId}" : {
+      "delete" : {
+        "tags" : [ "Supplier Site Bank Detail" ],
+        "summary" : "Delete Supplier Site Bank Account",
+        "description" : "Delete supplier site bank account",
+        "operationId" : "deleteSupplierSiteBankAccount",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PaymentInstrumentAssignmentId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSupplierSiteBankAccount-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/site/{SupplierSiteId}/paymentDetail" : {
+      "get" : {
+        "tags" : [ "Supplier Site Payment" ],
+        "summary" : "Get Supplier Site Payment Details",
+        "description" : "Get payment methods and related information against a supplier site for a supplier.",
+        "operationId" : "getSupplierSitePaymentDetails",
+        "parameters" : [ {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierSitePaymentDetails-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}/paymentDetail/{PayeeId}" : {
+      "patch" : {
+        "tags" : [ "Supplier Site Payment" ],
+        "summary" : "Update Supplier Site Payment Details",
+        "description" : "Update existing payment methods and related information against a supplier site for a supplier",
+        "operationId" : "updateSupplierSitePaymentDtls",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PayeeId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierSitePaymentDtls-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierSitePaymentDtls-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/taxProfile/{PartyTaxProfileId}/taxProfile" : {
+      "patch" : {
+        "tags" : [ "Supplier Tax Profile" ],
+        "summary" : "Update Supplier Tax Profile",
+        "description" : "Update existing tax profile information at supplier profile level for a supplier",
+        "operationId" : "updateSupplierTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PartyTaxProfileId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierTaxProfile-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}" : {
+      "delete" : {
+        "tags" : [ "Supplier Site" ],
+        "summary" : "Delete Site",
+        "description" : "De-activate an existing site for a supplier",
+        "operationId" : "deleteSite",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSite-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Supplier Site" ],
+        "summary" : "Update Supplier Sites",
+        "description" : "Update an existing site for a supplier",
+        "operationId" : "updateSupplierSites",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierSites-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierSites-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/site/{SupplierSiteId}/bankaccount/{PayeeId}" : {
+      "get" : {
+        "tags" : [ "Supplier Site Bank Detail" ],
+        "summary" : "Get Supplier Site Bank Details",
+        "description" : "Get bank accounts associated to a supplier site for a supplier",
+        "operationId" : "getSupplierSiteBankDetails",
+        "parameters" : [ {
+          "name" : "PayeeId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierSiteBankDetails-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact" : {
+      "post" : {
+        "tags" : [ "Supplier Contact" ],
+        "summary" : "Create Contact",
+        "description" : "Create new contact for a supplier",
+        "operationId" : "createContact",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateContact-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateContact-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}" : {
+      "delete" : {
+        "tags" : [ "Supplier Contact" ],
+        "summary" : "Delete Contact",
+        "description" : "De-activate an existing contact for a supplier",
+        "operationId" : "deleteContact",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteContact-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Supplier Contact" ],
+        "summary" : "Update Contact",
+        "description" : "Update an existing contact for a supplier",
+        "operationId" : "updateSupplierContacts",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierContacts-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierContacts-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/taxProfile" : {
+      "get" : {
+        "tags" : [ "Supplier Tax Profile" ],
+        "summary" : "Get Supplier Tax Profile",
+        "description" : "Get tax profile information stored at supplier profile level for a supplier",
+        "operationId" : "getSupplierTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/profile" : {
+      "patch" : {
+        "tags" : [ "Supplier Profile" ],
+        "summary" : "Update Supplier Profile",
+        "description" : "Update existing supplier profile information for a supplier",
+        "operationId" : "updateSupplier",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplier-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplier-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/addresse/{AddressName}" : {
+      "get" : {
+        "tags" : [ "Supplier Address Tax Profile" ],
+        "summary" : "Get Supplier Address Tax Profile",
+        "description" : "Get tax profile information against a supplier address for a supplier",
+        "operationId" : "getSupplierAddressTaxProfile",
+        "parameters" : [ {
+          "name" : "AddressName",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierAddressTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "A sample description of the Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse" : {
+      "post" : {
+        "tags" : [ "Supplier Address" ],
+        "summary" : "Create Address",
+        "description" : "Create new address for a supplier",
+        "operationId" : "createAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Reponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse/{SupplierAddressId}" : {
+      "delete" : {
+        "tags" : [ "Supplier Address" ],
+        "summary" : "Delete Address.",
+        "description" : "De-activate a supplier address for a supplier",
+        "operationId" : "deleteAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Supplier Address" ],
+        "summary" : "Update Supplier Address",
+        "description" : "Update an existing address for a supplier",
+        "operationId" : "updateSupplierAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Reponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse/{SupplierAddressId}/taxProfile/{PartyTaxProfileId}" : {
+      "patch" : {
+        "tags" : [ "Supplier Address Tax Profile" ],
+        "summary" : "Update Supplier Address Tax Profile",
+        "description" : "Update existing tax profile information against an existing address for a supplier",
+        "operationId" : "updateSupplierAddressTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PartyTaxProfileId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierAddressTaxProfile-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierAddressTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}/address/{SupplierContactAddressId}" : {
+      "delete" : {
+        "tags" : [ "Supplier Contact Address" ],
+        "summary" : "Delete Supplier Contact Address",
+        "description" : "Delete a contact/address association for a supplier",
+        "operationId" : "deleteSupplierContactAddress",
+        "parameters" : [ {
+          "name" : "SupplierContactAddressId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSupplierContactAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site" : {
+      "post" : {
+        "tags" : [ "Supplier Site" ],
+        "summary" : "Create Site",
+        "description" : "Create new site and associated bank account for a supplier",
+        "operationId" : "createSite",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateSite-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateSite-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault  Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}/address" : {
+      "post" : {
+        "tags" : [ "Supplier Contact Address" ],
+        "summary" : "Create Supplier Contact Address",
+        "description" : "Create a new contact/address association for a supplier",
+        "operationId" : "createSupplierContactAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateSupplierContactAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateSupplierContactAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CreateAddress-Request" : {
+        "required" : [ "AddressLine1", "AddressLine2", "AddressLine3", "AddressLine4", "AddressName", "AddressPurposeOrderingFlag", "AddressPurposeRemitToFlag", "City", "Country", "County", "Email", "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "PostalCode", "TaxClassificationCode", "TaxRegistrationCountry", "TaxRegistrationNumber" ],
+        "type" : "object",
+        "properties" : {
+          "AddressName" : {
+            "type" : "string"
+          },
+          "AddressLine1" : {
+            "type" : "string"
+          },
+          "AddressLine2" : {
+            "type" : "string"
+          },
+          "AddressLine3" : {
+            "type" : "string"
+          },
+          "AddressLine4" : {
+            "type" : "string"
+          },
+          "City" : {
+            "type" : "string"
+          },
+          "County" : {
+            "type" : "string"
+          },
+          "PostalCode" : {
+            "type" : "string"
+          },
+          "Country" : {
+            "type" : "string"
+          },
+          "AddressPurposeRemitToFlag" : {
+            "type" : "boolean"
+          },
+          "AddressPurposeOrderingFlag" : {
+            "type" : "boolean"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "TaxClassificationCode" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateAddress-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DeleteSupplierContactAddress-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateSite-Request" : {
+        "required" : [ "CommunicationMethodCode", "EInvoicingSupplierSiteID", "Email", "InvoiceCurrencyCode", "PORequired", "PayGroup", "PaymentCurrencyCode", "PaymentExtBankAccountName", "PaymentExtBankAccountNumber", "PaymentExtBankBranchNumber", "PaymentExtBankName", "PaymentExtCountryCode", "PaymentExtCountryName", "PaymentExtCurrencyCode", "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "PaymentTerms", "PrimaryVATCode", "ProcurementBUId", "SecondaryVATCode", "SitePurposePayFlag", "SitePurposePrimaryPayFlag", "SitePurposePurchasingFlag", "SupplierAddressName", "SupplierSite", "_0x737472_100_0x706572_ElectronicInvoice", "assignments" ],
+        "type" : "object",
+        "properties" : {
+          "ProcurementBUId" : {
+            "type" : "number"
+          },
+          "SupplierSite" : {
+            "type" : "string"
+          },
+          "SupplierAddressName" : {
+            "type" : "string"
+          },
+          "SitePurposePurchasingFlag" : {
+            "type" : "boolean"
+          },
+          "SitePurposePayFlag" : {
+            "type" : "boolean"
+          },
+          "SitePurposePrimaryPayFlag" : {
+            "type" : "boolean"
+          },
+          "PrimaryVATCode" : {
+            "type" : "string"
+          },
+          "SecondaryVATCode" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "EInvoicingSupplierSiteID" : {
+            "type" : "number"
+          },
+          "_0x737472_100_0x706572_ElectronicInvoice" : {
+            "type" : "string"
+          },
+          "CommunicationMethodCode" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "InvoiceCurrencyCode" : {
+            "type" : "string"
+          },
+          "PaymentCurrencyCode" : {
+            "type" : "string"
+          },
+          "PayGroup" : {
+            "type" : "string"
+          },
+          "PaymentTerms" : {
+            "type" : "string"
+          },
+          "assignments" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateSiteRequest_assignments"
+            }
+          },
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          },
+          "PaymentExtCountryCode" : {
+            "type" : "string"
+          },
+          "PaymentExtCountryName" : {
+            "type" : "string"
+          },
+          "PaymentExtBankName" : {
+            "type" : "string"
+          },
+          "PaymentExtBankBranchNumber" : {
+            "type" : "string"
+          },
+          "PaymentExtCurrencyCode" : {
+            "type" : "string"
+          },
+          "PaymentExtBankAccountNumber" : {
+            "type" : "string"
+          },
+          "PaymentExtBankAccountName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateSite-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DeleteContact-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateContact-Request" : {
+        "required" : [ "Email", "FirstName", "JobTitle", "LastName", "MobileAreaCode", "MobileCountryCode", "MobileNumber", "PhoneAreaCode", "PhoneCountryCode", "PhoneNumber", "Salutation", "addresses" ],
+        "type" : "object",
+        "properties" : {
+          "Salutation" : {
+            "type" : "string"
+          },
+          "FirstName" : {
+            "type" : "string"
+          },
+          "LastName" : {
+            "type" : "string"
+          },
+          "JobTitle" : {
+            "type" : "string"
+          },
+          "PhoneCountryCode" : {
+            "type" : "string"
+          },
+          "PhoneAreaCode" : {
+            "type" : "string"
+          },
+          "PhoneNumber" : {
+            "type" : "string"
+          },
+          "MobileCountryCode" : {
+            "type" : "string"
+          },
+          "MobileAreaCode" : {
+            "type" : "string"
+          },
+          "MobileNumber" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "addresses" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateContactRequest_addresses"
+            }
+          }
+        }
+      },
+      "CreateContact-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DeleteSite-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplier-Response" : {
+        "required" : [ "Address", "BusinessRelationship", "BusinessRelationshipCode", "Contacts", "CorporateWebSite", "CreationSource", "CreationSourceCode", "DUNSNumber", "InactiveDate", "IntercompanyCode", "PORequired", "Sites", "Status", "SubjectiveSupplierType", "Supplier", "SupplierId", "SupplierNumber", "SupplierPartyId", "SupplierType", "SupplierTypeCode", "TaxOrganizationType", "TaxRegistrationCountry", "TaxRegistrationCountryCode", "TaxRegistrationNumber", "TaxpayerCountry", "TaxpayerCountryCode", "TaxpayerId" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierId" : {
+            "type" : "number"
+          },
+          "SupplierPartyId" : {
+            "type" : "number"
+          },
+          "Supplier" : {
+            "type" : "string"
+          },
+          "SupplierNumber" : {
+            "type" : "string"
+          },
+          "TaxOrganizationType" : {
+            "type" : "string"
+          },
+          "SupplierTypeCode" : {
+            "type" : "string"
+          },
+          "SupplierType" : {
+            "type" : "string"
+          },
+          "InactiveDate" : {
+            "type" : "string"
+          },
+          "Status" : {
+            "type" : "string"
+          },
+          "BusinessRelationshipCode" : {
+            "type" : "string"
+          },
+          "BusinessRelationship" : {
+            "type" : "string"
+          },
+          "CreationSourceCode" : {
+            "type" : "string"
+          },
+          "CreationSource" : {
+            "type" : "string"
+          },
+          "DUNSNumber" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountryCode" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "TaxpayerCountryCode" : {
+            "type" : "string"
+          },
+          "TaxpayerCountry" : {
+            "type" : "string"
+          },
+          "TaxpayerId" : {
+            "type" : "string"
+          },
+          "IntercompanyCode" : {
+            "type" : "string"
+          },
+          "SubjectiveSupplierType" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "CorporateWebSite" : {
+            "type" : "string"
+          },
+          "Address" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierResponse_Address"
+            }
+          },
+          "Contacts" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierResponse_Contacts"
+            }
+          },
+          "Sites" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierResponse_Sites"
+            }
+          }
+        }
+      },
+      "CreateSupplierContactAddress-Request" : {
+        "required" : [ "AddressName", "SupplierAddressId" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierAddressId" : {
+            "type" : "number"
+          },
+          "AddressName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateSupplierContactAddress-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierSitePaymentDetails-Response" : {
+        "required" : [ "PayeeId", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "SupplierPartyId", "SupplierSiteId", "externalPartyPaymentMethods" ],
+        "type" : "object",
+        "properties" : {
+          "PayeeId" : {
+            "type" : "number"
+          },
+          "SupplierPartyId" : {
+            "type" : "number"
+          },
+          "SupplierSiteId" : {
+            "type" : "number"
+          },
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "externalPartyPaymentMethods" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierSitePaymentDetailsResponse_externalPartyPaymentMethods"
+            }
+          }
+        }
+      },
+      "UpdateSupplierSitePaymentDtls-Request" : {
+        "required" : [ "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail" ],
+        "type" : "object",
+        "properties" : {
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierSitePaymentDtls-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierTaxProfile-Request" : {
+        "required" : [ "TaxClassificationCode" ],
+        "type" : "object",
+        "properties" : {
+          "TaxClassificationCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierTaxProfile-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierSites-Request" : {
+        "required" : [ "CommunicationMethodCode", "EInvoicingSupplierSiteID", "Email", "InvoiceCurrencyCode", "PORequired", "PayGroup", "PaymentCurrencyCode", "PaymentTerms", "PrimaryVATCode", "ProcurementBU", "ProcurementBUId", "SecondaryVATCode", "SitePurposePayFlag", "SitePurposePrimaryPayFlag", "SitePurposePurchasingFlag", "SupplierAddressId", "SupplierAddressName", "SupplierSite", "_0x737472_100_0x706572_ElectronicInvoice", "assignments" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierSite" : {
+            "type" : "string"
+          },
+          "ProcurementBUId" : {
+            "type" : "number"
+          },
+          "ProcurementBU" : {
+            "type" : "string"
+          },
+          "SupplierAddressId" : {
+            "type" : "number"
+          },
+          "SupplierAddressName" : {
+            "type" : "string"
+          },
+          "SitePurposePurchasingFlag" : {
+            "type" : "boolean"
+          },
+          "SitePurposePayFlag" : {
+            "type" : "boolean"
+          },
+          "SitePurposePrimaryPayFlag" : {
+            "type" : "boolean"
+          },
+          "PrimaryVATCode" : {
+            "type" : "string"
+          },
+          "SecondaryVATCode" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "EInvoicingSupplierSiteID" : {
+            "type" : "number"
+          },
+          "_0x737472_100_0x706572_ElectronicInvoice" : {
+            "type" : "string"
+          },
+          "CommunicationMethodCode" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "InvoiceCurrencyCode" : {
+            "type" : "string"
+          },
+          "PaymentCurrencyCode" : {
+            "type" : "string"
+          },
+          "PayGroup" : {
+            "type" : "string"
+          },
+          "PaymentTerms" : {
+            "type" : "string"
+          },
+          "assignments" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateSiteRequest_assignments"
+            }
+          }
+        }
+      },
+      "UpdateSupplierSites-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierSiteBankDetails-Response" : {
+        "required" : [ "bankAccounts", "count", "hasMore", "limit", "offset" ],
+        "type" : "object",
+        "properties" : {
+          "bankAccounts" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierSiteBankDetailsResponse_bankAccounts"
+            }
+          },
+          "count" : {
+            "type" : "number"
+          },
+          "hasMore" : {
+            "type" : "boolean"
+          },
+          "limit" : {
+            "type" : "number"
+          },
+          "offset" : {
+            "type" : "number"
+          }
+        }
+      },
+      "UpdateSupplierContacts-Request" : {
+        "required" : [ "Email", "FirstName", "JobTitle", "LastName", "MobileAreaCode", "MobileCountryCode", "MobileNumber", "PhoneAreaCode", "PhoneCountryCode", "PhoneNumber", "Salutation", "addresses" ],
+        "type" : "object",
+        "properties" : {
+          "Salutation" : {
+            "type" : "string"
+          },
+          "FirstName" : {
+            "type" : "string"
+          },
+          "LastName" : {
+            "type" : "string"
+          },
+          "JobTitle" : {
+            "type" : "string"
+          },
+          "PhoneCountryCode" : {
+            "type" : "string"
+          },
+          "PhoneAreaCode" : {
+            "type" : "string"
+          },
+          "PhoneNumber" : {
+            "type" : "string"
+          },
+          "MobileCountryCode" : {
+            "type" : "string"
+          },
+          "MobileAreaCode" : {
+            "type" : "string"
+          },
+          "MobileNumber" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "addresses" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateContactRequest_addresses"
+            }
+          }
+        }
+      },
+      "UpdateSupplierContacts-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierTaxProfile-Response" : {
+        "required" : [ "PartyTaxProfileId", "SupplierPartyId", "TaxClassificationCode" ],
+        "type" : "object",
+        "properties" : {
+          "PartyTaxProfileId" : {
+            "type" : "number"
+          },
+          "SupplierPartyId" : {
+            "type" : "number"
+          },
+          "TaxClassificationCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplier-Request" : {
+        "required" : [ "CorporateWebSite", "DUNSNumber", "IntercompanyCode", "PORequired", "SubjectiveSupplierType", "SupplierName", "SupplierType", "TaxOrganizationType", "TaxRegistrationCountry", "TaxRegistrationNumber", "TaxpayerCountry", "TaxpayerId" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierName" : {
+            "type" : "string"
+          },
+          "TaxOrganizationType" : {
+            "type" : "string"
+          },
+          "SupplierType" : {
+            "type" : "string"
+          },
+          "DUNSNumber" : {
+            "type" : "string"
+          },
+          "TaxpayerCountry" : {
+            "type" : "string"
+          },
+          "TaxpayerId" : {
+            "type" : "string"
+          },
+          "IntercompanyCode" : {
+            "type" : "string"
+          },
+          "SubjectiveSupplierType" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "CorporateWebSite" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplier-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierAddressTaxProfile-Response" : {
+        "required" : [ "PartyTaxProfileId", "SupplierAddressId", "SupplierPartyId", "TaxClassificationCode", "TaxRegistrationCountry", "TaxRegistrationNumber" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierPartyId" : {
+            "type" : "number"
+          },
+          "SupplierAddressId" : {
+            "type" : "number"
+          },
+          "PartyTaxProfileId" : {
+            "type" : "number"
+          },
+          "TaxClassificationCode" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierAddress-Request" : {
+        "required" : [ "AddressLine1", "AddressLine2", "AddressLine3", "AddressLine4", "AddressName", "AddressPurposeOrderingFlag", "AddressPurposeRemitToFlag", "City", "Country", "County", "Email", "PostalCode" ],
+        "type" : "object",
+        "properties" : {
+          "AddressName" : {
+            "type" : "string"
+          },
+          "AddressLine1" : {
+            "type" : "string"
+          },
+          "AddressLine2" : {
+            "type" : "string"
+          },
+          "AddressLine3" : {
+            "type" : "string"
+          },
+          "AddressLine4" : {
+            "type" : "string"
+          },
+          "City" : {
+            "type" : "string"
+          },
+          "County" : {
+            "type" : "string"
+          },
+          "PostalCode" : {
+            "type" : "string"
+          },
+          "Country" : {
+            "type" : "string"
+          },
+          "AddressPurposeRemitToFlag" : {
+            "type" : "boolean"
+          },
+          "AddressPurposeOrderingFlag" : {
+            "type" : "boolean"
+          },
+          "Email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierAddress-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierAddressTaxProfile-Request" : {
+        "required" : [ "TaxClassificationCode", "TaxRegistrationCountry", "TaxRegistrationNumber" ],
+        "type" : "object",
+        "properties" : {
+          "TaxClassificationCode" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UpdateSupplierAddressTaxProfile-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SupplierService-Request" : {
+        "required" : [ "Address", "BusinessRelationship", "Contacts", "CorporateWebSite", "DUNSNumber", "IntercompanyCode", "PORequired", "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "Sites", "SubjectiveSupplierType", "SubmitSupplierRequestor", "SupplierName", "SupplierType", "TaxClassificationCode", "TaxOrganizationType", "TaxRegistrationCountry", "TaxRegistrationNumber", "TaxpayerCountry", "TaxpayerId" ],
+        "type" : "object",
+        "properties" : {
+          "SupplierName" : {
+            "type" : "string"
+          },
+          "TaxOrganizationType" : {
+            "type" : "string"
+          },
+          "SupplierType" : {
+            "type" : "string"
+          },
+          "BusinessRelationship" : {
+            "type" : "string"
+          },
+          "DUNSNumber" : {
+            "type" : "string"
+          },
+          "TaxpayerCountry" : {
+            "type" : "string"
+          },
+          "TaxpayerId" : {
+            "type" : "string"
+          },
+          "IntercompanyCode" : {
+            "type" : "string"
+          },
+          "SubjectiveSupplierType" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "CorporateWebSite" : {
+            "type" : "string"
+          },
+          "TaxClassificationCode" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          },
+          "SubmitSupplierRequestor" : {
+            "type" : "string"
+          },
+          "Address" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SupplierServiceRequest_Address"
+            }
+          },
+          "Contacts" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SupplierServiceRequest_Contacts"
+            }
+          },
+          "Sites" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SupplierServiceRequest_Sites"
+            }
+          }
+        }
+      },
+      "SupplierService-Response" : {
+        "required" : [ "Response", "SupplierId", "SupplierName", "SupplierNumber" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          },
+          "SupplierId" : {
+            "type" : "number"
+          },
+          "SupplierNumber" : {
+            "type" : "string"
+          },
+          "SupplierName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetInvoices-Response" : {
+        "required" : [ "count", "hasMore", "items", "limit", "offset" ],
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetInvoicesResponse_items"
+            }
+          },
+          "count" : {
+            "type" : "number"
+          },
+          "hasMore" : {
+            "type" : "boolean"
+          },
+          "limit" : {
+            "type" : "number"
+          },
+          "offset" : {
+            "type" : "number"
+          }
+        }
+      },
+      "DeleteSupplierSiteBankAccount-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DeleteAddress-Response" : {
+        "required" : [ "Response" ],
+        "type" : "object",
+        "properties" : {
+          "Response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "APIInvocationError" : {
+        "required" : [ "detail", "errorCode", "errorDetails", "title", "type" ],
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "detail" : {
+            "type" : "string"
+          },
+          "errorCode" : {
+            "type" : "string"
+          },
+          "errorDetails" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/APIInvocationError_errorDetails"
+            }
+          }
+        }
+      },
+      "CreateSiteRequest_assignments" : {
+        "required" : [ "BillToBUId", "ClientBUId" ],
+        "type" : "object",
+        "properties" : {
+          "BillToBUId" : {
+            "type" : "number"
+          },
+          "ClientBUId" : {
+            "type" : "number"
+          }
+        }
+      },
+      "CreateContactRequest_addresses" : {
+        "required" : [ "AddressName" ],
+        "type" : "object",
+        "properties" : {
+          "AddressName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierResponse_Address" : {
+        "required" : [ "AddressLine1", "AddressLine2", "AddressLine3", "AddressLine4", "AddressName", "AddressPurposeOrderingFlag", "AddressPurposeRemitToFlag", "City", "Country", "County", "Email", "InactiveDate", "PostalCode", "Status", "SupplierAddressId" ],
+        "type" : "object",
+        "properties" : {
+          "InactiveDate" : {
+            "type" : "string"
+          },
+          "Status" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "PostalCode" : {
+            "type" : "string"
+          },
+          "SupplierAddressId" : {
+            "type" : "number"
+          },
+          "City" : {
+            "type" : "string"
+          },
+          "County" : {
+            "type" : "string"
+          },
+          "AddressPurposeRemitToFlag" : {
+            "type" : "boolean"
+          },
+          "AddressName" : {
+            "type" : "string"
+          },
+          "AddressLine3" : {
+            "type" : "string"
+          },
+          "AddressLine2" : {
+            "type" : "string"
+          },
+          "AddressLine1" : {
+            "type" : "string"
+          },
+          "AddressLine4" : {
+            "type" : "string"
+          },
+          "Country" : {
+            "type" : "string"
+          },
+          "AddressPurposeOrderingFlag" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "GetSupplierResponse_addresses" : {
+        "required" : [ "AddressName", "SupplierAddressId", "SupplierContactAddressId" ],
+        "type" : "object",
+        "properties" : {
+          "AddressName" : {
+            "type" : "string"
+          },
+          "SupplierContactAddressId" : {
+            "type" : "number"
+          },
+          "SupplierAddressId" : {
+            "type" : "number"
+          }
+        }
+      },
+      "GetSupplierResponse_Contacts" : {
+        "required" : [ "Email", "FirstName", "InactiveDate", "JobTitle", "LastName", "MobileAreaCode", "MobileCountryCode", "MobileNumber", "PhoneAreaCode", "PhoneCountryCode", "PhoneNumber", "Salutation", "Status", "SupplierContactId", "addresses" ],
+        "type" : "object",
+        "properties" : {
+          "Status" : {
+            "type" : "string"
+          },
+          "InactiveDate" : {
+            "type" : "string"
+          },
+          "addresses" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierResponse_addresses"
+            }
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "FirstName" : {
+            "type" : "string"
+          },
+          "SupplierContactId" : {
+            "type" : "number"
+          },
+          "MobileCountryCode" : {
+            "type" : "string"
+          },
+          "Salutation" : {
+            "type" : "string"
+          },
+          "JobTitle" : {
+            "type" : "string"
+          },
+          "MobileAreaCode" : {
+            "type" : "string"
+          },
+          "PhoneCountryCode" : {
+            "type" : "string"
+          },
+          "PhoneAreaCode" : {
+            "type" : "string"
+          },
+          "MobileNumber" : {
+            "type" : "string"
+          },
+          "PhoneNumber" : {
+            "type" : "string"
+          },
+          "LastName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierResponse_assignments" : {
+        "required" : [ "AssignmentId", "BillToBU", "BillToBUId", "ClientBU", "ClientBUId", "InactiveDate", "Status" ],
+        "type" : "object",
+        "properties" : {
+          "InactiveDate" : {
+            "type" : "string"
+          },
+          "Status" : {
+            "type" : "string"
+          },
+          "ClientBU" : {
+            "type" : "string"
+          },
+          "BillToBUId" : {
+            "type" : "number"
+          },
+          "BillToBU" : {
+            "type" : "string"
+          },
+          "ClientBUId" : {
+            "type" : "number"
+          },
+          "AssignmentId" : {
+            "type" : "number"
+          }
+        }
+      },
+      "GetSupplierResponse_Sites" : {
+        "required" : [ "CommunicationMethod", "CommunicationMethodCode", "EInvoicingSupplierSiteID", "Email", "InactiveDate", "InvoiceCurrency", "InvoiceCurrencyCode", "PORequired", "PayGroup", "PayGroupCode", "PaymentCurrency", "PaymentCurrencyCode", "PaymentTerms", "PaymentTermsId", "PrimaryVATCode", "ProcurementBU", "ProcurementBUId", "SecondaryVATCode", "SitePurposePayFlag", "SitePurposePrimaryPayFlag", "SitePurposeProcurementCardFlag", "SitePurposePurchasingFlag", "SitePurposeSourcingOnlyFlag", "Status", "SupplierAddressId", "SupplierAddressName", "SupplierSite", "SupplierSiteId", "_0x737472_100_0x706572_ElectronicInvoice", "assignments" ],
+        "type" : "object",
+        "properties" : {
+          "PORequired" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "PayGroupCode" : {
+            "type" : "string"
+          },
+          "assignments" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GetSupplierResponse_assignments"
+            }
+          },
+          "CommunicationMethodCode" : {
+            "type" : "string"
+          },
+          "SitePurposePrimaryPayFlag" : {
+            "type" : "boolean"
+          },
+          "SupplierAddressId" : {
+            "type" : "number"
+          },
+          "PaymentCurrency" : {
+            "type" : "string"
+          },
+          "PaymentTerms" : {
+            "type" : "string"
+          },
+          "SitePurposePayFlag" : {
+            "type" : "boolean"
+          },
+          "SupplierSiteId" : {
+            "type" : "number"
+          },
+          "PrimaryVATCode" : {
+            "type" : "string"
+          },
+          "SitePurposeSourcingOnlyFlag" : {
+            "type" : "boolean"
+          },
+          "SecondaryVATCode" : {
+            "type" : "string"
+          },
+          "SitePurposeProcurementCardFlag" : {
+            "type" : "boolean"
+          },
+          "InvoiceCurrency" : {
+            "type" : "string"
+          },
+          "ProcurementBUId" : {
+            "type" : "number"
+          },
+          "ProcurementBU" : {
+            "type" : "string"
+          },
+          "InactiveDate" : {
+            "type" : "string"
+          },
+          "Status" : {
+            "type" : "string"
+          },
+          "SupplierAddressName" : {
+            "type" : "string"
+          },
+          "PayGroup" : {
+            "type" : "string"
+          },
+          "PaymentTermsId" : {
+            "type" : "number"
+          },
+          "EInvoicingSupplierSiteID" : {
+            "type" : "number"
+          },
+          "CommunicationMethod" : {
+            "type" : "string"
+          },
+          "PaymentCurrencyCode" : {
+            "type" : "string"
+          },
+          "_0x737472_100_0x706572_ElectronicInvoice" : {
+            "type" : "string"
+          },
+          "SupplierSite" : {
+            "type" : "string"
+          },
+          "SitePurposePurchasingFlag" : {
+            "type" : "boolean"
+          },
+          "InvoiceCurrencyCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierSitePaymentDetailsResponse_externalPartyPaymentMethods" : {
+        "required" : [ "ExternalPartyPaymentMethodId", "PaymentMethodCode", "PaymentMethodDefault" ],
+        "type" : "object",
+        "properties" : {
+          "ExternalPartyPaymentMethodId" : {
+            "type" : "number"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetSupplierSiteBankDetailsResponse_bankAccounts" : {
+        "required" : [ "BankAccountId", "BankAccountNumber", "EndDate", "PayeeId", "PaymentInstrumentAssignmentId", "PrimaryIndicator", "StartDate", "SupplierPartyId", "SupplierSiteId" ],
+        "type" : "object",
+        "properties" : {
+          "StartDate" : {
+            "type" : "string"
+          },
+          "PayeeId" : {
+            "type" : "number"
+          },
+          "SupplierPartyId" : {
+            "type" : "number"
+          },
+          "SupplierSiteId" : {
+            "type" : "number"
+          },
+          "BankAccountId" : {
+            "type" : "number"
+          },
+          "PrimaryIndicator" : {
+            "type" : "string"
+          },
+          "PaymentInstrumentAssignmentId" : {
+            "type" : "number"
+          },
+          "EndDate" : {
+            "type" : "string"
+          },
+          "BankAccountNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SupplierServiceRequest_Address" : {
+        "required" : [ "AddressLine1", "AddressLine2", "AddressLine3", "AddressLine4", "AddressName", "AddressPurposeOrderingFlag", "AddressPurposeRemitToFlag", "City", "Country", "County", "Email", "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "PostalCode", "TaxClassificationCode", "TaxRegistrationCountry", "TaxRegistrationNumber" ],
+        "type" : "object",
+        "properties" : {
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "TaxRegistrationCountry" : {
+            "type" : "string"
+          },
+          "PostalCode" : {
+            "type" : "string"
+          },
+          "City" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          },
+          "County" : {
+            "type" : "string"
+          },
+          "AddressPurposeRemitToFlag" : {
+            "type" : "boolean"
+          },
+          "AddressName" : {
+            "type" : "string"
+          },
+          "AddressLine3" : {
+            "type" : "string"
+          },
+          "AddressLine2" : {
+            "type" : "string"
+          },
+          "AddressLine1" : {
+            "type" : "string"
+          },
+          "TaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "AddressLine4" : {
+            "type" : "string"
+          },
+          "TaxClassificationCode" : {
+            "type" : "string"
+          },
+          "Country" : {
+            "type" : "string"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "AddressPurposeOrderingFlag" : {
+            "type" : "boolean"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SupplierServiceRequest_Contacts" : {
+        "required" : [ "Email", "FirstName", "JobTitle", "LastName", "MiddleName", "MobileAreaCode", "MobileCountryCode", "MobileNumber", "PhoneAreaCode", "PhoneCountryCode", "PhoneNumber", "Salutation", "addresses" ],
+        "type" : "object",
+        "properties" : {
+          "addresses" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateContactRequest_addresses"
+            }
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "FirstName" : {
+            "type" : "string"
+          },
+          "MobileCountryCode" : {
+            "type" : "string"
+          },
+          "MiddleName" : {
+            "type" : "string"
+          },
+          "Salutation" : {
+            "type" : "string"
+          },
+          "JobTitle" : {
+            "type" : "string"
+          },
+          "MobileAreaCode" : {
+            "type" : "string"
+          },
+          "PhoneCountryCode" : {
+            "type" : "string"
+          },
+          "PhoneAreaCode" : {
+            "type" : "string"
+          },
+          "MobileNumber" : {
+            "type" : "string"
+          },
+          "PhoneNumber" : {
+            "type" : "string"
+          },
+          "LastName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SupplierServiceRequest_Sites" : {
+        "required" : [ "CommunicationMethodCode", "EInvoicingSupplierSiteID", "Email", "InvoiceCurrencyCode", "PORequired", "PayGroup", "PaymentCurrencyCode", "PaymentExtBankAccountName", "PaymentExtBankAccountNumber", "PaymentExtBankBranchNumber", "PaymentExtBankName", "PaymentExtCountryCode", "PaymentExtCountryName", "PaymentExtCurrencyCode", "PaymentMethodCode", "PaymentMethodDefault", "PaymentRemitAdviceDeliveryMethod", "PaymentRemitAdviceEmail", "PaymentTerms", "PrimaryVATCode", "ProcurementBUId", "SecondaryVATCode", "SitePurposePayFlag", "SitePurposePrimaryPayFlag", "SitePurposePurchasingFlag", "SupplierAddressName", "SupplierSite", "_0x737472_100_0x706572_ElectronicInvoice", "assignments" ],
+        "type" : "object",
+        "properties" : {
+          "PaymentExtBankAccountName" : {
+            "type" : "string"
+          },
+          "PORequired" : {
+            "type" : "string"
+          },
+          "Email" : {
+            "type" : "string"
+          },
+          "assignments" : {
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CreateSiteRequest_assignments"
+            }
+          },
+          "CommunicationMethodCode" : {
+            "type" : "string"
+          },
+          "SitePurposePrimaryPayFlag" : {
+            "type" : "boolean"
+          },
+          "PaymentTerms" : {
+            "type" : "string"
+          },
+          "PaymentExtCurrencyCode" : {
+            "type" : "string"
+          },
+          "PaymentExtBankBranchNumber" : {
+            "type" : "string"
+          },
+          "SitePurposePayFlag" : {
+            "type" : "boolean"
+          },
+          "PrimaryVATCode" : {
+            "type" : "string"
+          },
+          "SecondaryVATCode" : {
+            "type" : "string"
+          },
+          "PaymentExtBankName" : {
+            "type" : "string"
+          },
+          "PaymentExtCountryName" : {
+            "type" : "string"
+          },
+          "ProcurementBUId" : {
+            "type" : "number"
+          },
+          "PaymentRemitAdviceDeliveryMethod" : {
+            "type" : "string"
+          },
+          "PaymentExtBankAccountNumber" : {
+            "type" : "string"
+          },
+          "SupplierAddressName" : {
+            "type" : "string"
+          },
+          "PayGroup" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          },
+          "EInvoicingSupplierSiteID" : {
+            "type" : "number"
+          },
+          "PaymentCurrencyCode" : {
+            "type" : "string"
+          },
+          "_0x737472_100_0x706572_ElectronicInvoice" : {
+            "type" : "string"
+          },
+          "SupplierSite" : {
+            "type" : "string"
+          },
+          "SitePurposePurchasingFlag" : {
+            "type" : "boolean"
+          },
+          "PaymentRemitAdviceEmail" : {
+            "type" : "string"
+          },
+          "PaymentMethodDefault" : {
+            "type" : "string"
+          },
+          "PaymentExtCountryCode" : {
+            "type" : "string"
+          },
+          "InvoiceCurrencyCode" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GetInvoicesResponse_items" : {
+        "required" : [ "AccountCodingStatus", "AccountingDate", "AccountingStatus", "AmountPaid", "ApplyAfterDate", "ApprovalStatus", "BankAccount", "BankChargeBearer", "BaseAmount", "BudgetDate", "BusinessUnit", "CanceledBy", "CanceledDate", "CanceledFlag", "ControlAmount", "ConversionDate", "ConversionRate", "ConversionRateType", "CreatedBy", "CreationDate", "DeliveryChannel", "DeliveryChannelCode", "Description", "DocumentCategory", "DocumentFiscalClassificationCodePath", "DocumentSequence", "ExternalBankAccountId", "FirstPartyTaxRegistrationId", "FirstPartyTaxRegistrationNumber", "FundsStatus", "GoodsReceivedDate", "ImageDocumentNumber", "InvoiceAmount", "InvoiceCurrency", "InvoiceDate", "InvoiceGroup", "InvoiceId", "InvoiceNumber", "InvoiceReceivedDate", "InvoiceSource", "InvoiceSourceCode", "InvoiceType", "LastUpdateDate", "LastUpdateLogin", "LastUpdatedBy", "LegalEntity", "LegalEntityIdentifier", "LiabilityDistribution", "PaidStatus", "Party", "PartySite", "PayAloneFlag", "PayGroup", "PaymentCurrency", "PaymentMethod", "PaymentMethodCode", "PaymentReason", "PaymentReasonCode", "PaymentReasonComments", "PaymentTerms", "ProcurementBU", "ProductTable", "PurchaseOrderNumber", "ReferenceKeyFive", "ReferenceKeyFour", "ReferenceKeyOne", "ReferenceKeyThree", "ReferenceKeyTwo", "RemittanceMessageOne", "RemittanceMessageThree", "RemittanceMessageTwo", "Requester", "RequesterId", "RoutingAttribute1", "RoutingAttribute2", "RoutingAttribute3", "RoutingAttribute4", "RoutingAttribute5", "SettlementPriority", "Supplier", "SupplierIBAN", "SupplierNumber", "SupplierSite", "SupplierTaxRegistrationNumber", "TaxationCountry", "TermsDate", "UniqueRemittanceIdentifier", "UniqueRemittanceIdentifierCheckDigit", "ValidationStatus", "VoucherNumber" ],
+        "type" : "object",
+        "properties" : {
+          "LegalEntity" : {
+            "type" : "string"
+          },
+          "DocumentFiscalClassificationCodePath" : {
+            "type" : "string"
+          },
+          "CreationDate" : {
+            "type" : "string"
+          },
+          "ReferenceKeyTwo" : {
+            "type" : "string"
+          },
+          "PaymentReasonComments" : {
+            "type" : "string"
+          },
+          "ImageDocumentNumber" : {
+            "type" : "string"
+          },
+          "AmountPaid" : {
+            "type" : "string"
+          },
+          "PaymentCurrency" : {
+            "type" : "string"
+          },
+          "DocumentCategory" : {
+            "type" : "string"
+          },
+          "ApprovalStatus" : {
+            "type" : "string"
+          },
+          "RemittanceMessageTwo" : {
+            "type" : "string"
+          },
+          "RemittanceMessageOne" : {
+            "type" : "string"
+          },
+          "Requester" : {
+            "type" : "string"
+          },
+          "PaymentReason" : {
+            "type" : "string"
+          },
+          "CanceledDate" : {
+            "type" : "string"
+          },
+          "BudgetDate" : {
+            "type" : "string"
+          },
+          "InvoiceNumber" : {
+            "type" : "string"
+          },
+          "CanceledBy" : {
+            "type" : "string"
+          },
+          "UniqueRemittanceIdentifier" : {
+            "type" : "string"
+          },
+          "InvoiceCurrency" : {
+            "type" : "string"
+          },
+          "InvoiceReceivedDate" : {
+            "type" : "string"
+          },
+          "ProductTable" : {
+            "type" : "string"
+          },
+          "ProcurementBU" : {
+            "type" : "string"
+          },
+          "PaidStatus" : {
+            "type" : "string"
+          },
+          "LastUpdatedBy" : {
+            "type" : "string"
+          },
+          "LegalEntityIdentifier" : {
+            "type" : "string"
+          },
+          "CreatedBy" : {
+            "type" : "string"
+          },
+          "ReferenceKeyFive" : {
+            "type" : "string"
+          },
+          "DeliveryChannelCode" : {
+            "type" : "string"
+          },
+          "AccountCodingStatus" : {
+            "type" : "string"
+          },
+          "RemittanceMessageThree" : {
+            "type" : "string"
+          },
+          "FirstPartyTaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "VoucherNumber" : {
+            "type" : "string"
+          },
+          "PaymentMethodCode" : {
+            "type" : "string"
+          },
+          "TaxationCountry" : {
+            "type" : "string"
+          },
+          "SupplierIBAN" : {
+            "type" : "string"
+          },
+          "DeliveryChannel" : {
+            "type" : "string"
+          },
+          "InvoiceSourceCode" : {
+            "type" : "string"
+          },
+          "BusinessUnit" : {
+            "type" : "string"
+          },
+          "SupplierSite" : {
+            "type" : "string"
+          },
+          "SupplierTaxRegistrationNumber" : {
+            "type" : "string"
+          },
+          "PaymentMethod" : {
+            "type" : "string"
+          },
+          "InvoiceGroup" : {
+            "type" : "string"
+          },
+          "ConversionDate" : {
+            "type" : "string"
+          },
+          "LastUpdateLogin" : {
+            "type" : "string"
+          },
+          "Description" : {
+            "type" : "string"
+          },
+          "ApplyAfterDate" : {
+            "type" : "string"
+          },
+          "PayAloneFlag" : {
+            "type" : "boolean"
+          },
+          "InvoiceAmount" : {
+            "type" : "number"
+          },
+          "AccountingDate" : {
+            "type" : "string"
+          },
+          "PaymentTerms" : {
+            "type" : "string"
+          },
+          "InvoiceId" : {
+            "type" : "number"
+          },
+          "ControlAmount" : {
+            "type" : "string"
+          },
+          "ConversionRateType" : {
+            "type" : "string"
+          },
+          "PartySite" : {
+            "type" : "string"
+          },
+          "BaseAmount" : {
+            "type" : "string"
+          },
+          "Party" : {
+            "type" : "string"
+          },
+          "PaymentReasonCode" : {
+            "type" : "string"
+          },
+          "FundsStatus" : {
+            "type" : "string"
+          },
+          "RoutingAttribute3" : {
+            "type" : "string"
+          },
+          "ExternalBankAccountId" : {
+            "type" : "number"
+          },
+          "RoutingAttribute2" : {
+            "type" : "string"
+          },
+          "ReferenceKeyFour" : {
+            "type" : "string"
+          },
+          "Supplier" : {
+            "type" : "string"
+          },
+          "CanceledFlag" : {
+            "type" : "boolean"
+          },
+          "RoutingAttribute5" : {
+            "type" : "string"
+          },
+          "InvoiceDate" : {
+            "type" : "string"
+          },
+          "AccountingStatus" : {
+            "type" : "string"
+          },
+          "RoutingAttribute4" : {
+            "type" : "string"
+          },
+          "DocumentSequence" : {
+            "type" : "string"
+          },
+          "RoutingAttribute1" : {
+            "type" : "string"
+          },
+          "ReferenceKeyThree" : {
+            "type" : "string"
+          },
+          "PurchaseOrderNumber" : {
+            "type" : "string"
+          },
+          "UniqueRemittanceIdentifierCheckDigit" : {
+            "type" : "string"
+          },
+          "SettlementPriority" : {
+            "type" : "string"
+          },
+          "PayGroup" : {
+            "type" : "string"
+          },
+          "RequesterId" : {
+            "type" : "string"
+          },
+          "BankAccount" : {
+            "type" : "string"
+          },
+          "ReferenceKeyOne" : {
+            "type" : "string"
+          },
+          "SupplierNumber" : {
+            "type" : "string"
+          },
+          "InvoiceSource" : {
+            "type" : "string"
+          },
+          "FirstPartyTaxRegistrationId" : {
+            "type" : "string"
+          },
+          "InvoiceType" : {
+            "type" : "string"
+          },
+          "ValidationStatus" : {
+            "type" : "string"
+          },
+          "TermsDate" : {
+            "type" : "string"
+          },
+          "ConversionRate" : {
+            "type" : "string"
+          },
+          "LiabilityDistribution" : {
+            "type" : "string"
+          },
+          "GoodsReceivedDate" : {
+            "type" : "string"
+          },
+          "LastUpdateDate" : {
+            "type" : "string"
+          },
+          "BankChargeBearer" : {
+            "type" : "string"
+          }
+        }
+      },
+      "APIInvocationError_errorDetails" : {
+        "required" : [ "errorCode", "errorPath", "instance", "title", "type" ],
+        "type" : "object",
+        "properties" : {
+          "instance" : {
+            "type" : "string"
+          },
+          "errorCode" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "errorPath" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "application" : {
+        "type" : "oauth2",
+        "flows" : {
+          "clientCredentials" : {
+            "tokenUrl" : "https://idcs-fbf7fdedd3cd4fa59b99c7e3f1028b7a.identity.oraclecloud.com/oauth2/v1/token",
+            "scopes" : {
+              "https://8A852861C5274E569218B12589776163.integration.ocp.oraclegovcloud.uk:443urn:opc:resource:consumer::all" : "OIC Integration"
+            }
+          }
+        }
+      }
+    }
+  }
+}
