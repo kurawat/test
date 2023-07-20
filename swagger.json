@@ -1,0 +1,1330 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/NHS-SBS/NHS_SBS_SSC_Suppliers_API/1.0.0"
+  }, {
+    "description" : "NHS SBS APIGW Sandbox",
+    "url" : "https://apigw-dev.sbs.nhs.uk/rest/SSC/suppliers/v1"
+  } ],
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "NHS SBS SSC Suppliers API",
+    "description" : "This is NHS SBS SSC Suppliers API"
+  },
+  "security" : [ {
+    "application" : [ ]
+  } ],
+  "tags" : [ {
+    "name" : "Supplier",
+    "description" : "Supplier Operations"
+  }, {
+    "name" : "Supplier Address",
+    "description" : "Supplier Address Operations"
+  }, {
+    "name" : "Supplier Address Tax Profile",
+    "description" : "Supplier Address Tax Profile Operations"
+  }, {
+    "name" : "Supplier Contact",
+    "description" : "Supplier Contact Operations"
+  }, {
+    "name" : "Supplier Contact Address",
+    "description" : "Supplier Contact Address Operations"
+  }, {
+    "name" : "Supplier Profile",
+    "description" : "Supplier Profile Operations"
+  }, {
+    "name" : "Supplier Site",
+    "description" : "Supplier Site Operations"
+  }, {
+    "name" : "Supplier Site Bank Detail",
+    "description" : "Supplier Site Bank Detail Operations"
+  }, {
+    "name" : "Supplier Site Payment",
+    "description" : "Supplier Site Payment Operations"
+  }, {
+    "name" : "Supplier Tax Profile",
+    "description" : "Supplier Tax Profile Operations"
+  }, {
+    "name" : "Supplier Transaction",
+    "description" : "Supplier Transaction Operations"
+  } ],
+  "paths" : {
+    "/supplier/{SupplierId}" : {
+      "get" : {
+        "tags" : [ "Supplier" ],
+        "summary" : "Get Supplier",
+        "description" : "Get Supplier profile, address(es), contact(s), site(s) record(s)",
+        "operationId" : "getSupplier",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplier-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier" : {
+      "post" : {
+        "summary" : "Create Supplier",
+        "description" : "Create new Supplier Profile, Address(es), Contact(s), Site(s) and associated bank account(s)",
+        "tags" : [ "Supplier" ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SupplierService-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SupplierService-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice" : {
+      "get" : {
+        "summary" : "Get Invoices",
+        "description" : "Get payables invoices",
+        "tags" : [ "Supplier Transaction" ],
+        "operationId" : "getInvoices",
+        "parameters" : [ {
+          "name" : "q",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "frameworkVersion",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "orderBy",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetInvoices-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}/bankAccount/{PaymentInstrumentAssignmentId}" : {
+      "delete" : {
+        "summary" : "Delete Supplier Site Bank Account",
+        "description" : "Delete supplier site bank account",
+        "tags" : [ "Supplier Site Bank Detail" ],
+        "operationId" : "deleteSupplierSiteBankAccount",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PaymentInstrumentAssignmentId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSupplierSiteBankAccount-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/site/{SupplierSiteId}/paymentDetail" : {
+      "get" : {
+        "summary" : "Get Supplier Site Payment Details",
+        "description" : "Get payment methods and related information against a supplier site for a supplier.",
+        "tags" : [ "Supplier Site Payment" ],
+        "operationId" : "getSupplierSitePaymentDetails",
+        "parameters" : [ {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierSitePaymentDetails-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}/paymentDetail/{PayeeId}" : {
+      "patch" : {
+        "summary" : "Update Supplier Site Payment Details",
+        "description" : "Update existing payment methods and related information against a supplier site for a supplier",
+        "tags" : [ "Supplier Site Payment" ],
+        "operationId" : "updateSupplierSitePaymentDtls",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PayeeId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierSitePaymentDtls-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierSitePaymentDtls-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/taxProfile/{PartyTaxProfileId}/taxProfile" : {
+      "patch" : {
+        "summary" : "Update Supplier Tax Profile",
+        "description" : "Update existing tax profile information at supplier profile level for a supplier",
+        "tags" : [ "Supplier Tax Profile" ],
+        "operationId" : "updateSupplierTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PartyTaxProfileId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierTaxProfile-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site/{SupplierSiteId}" : {
+      "patch" : {
+        "summary" : "Update Supplier Sites",
+        "description" : "Update an existing site for a supplier",
+        "tags" : [ "Supplier Site" ],
+        "operationId" : "updateSupplierSites",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierSites-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierSites-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Site",
+        "description" : "De-activate an existing site for a supplier",
+        "tags" : [ "Supplier Site" ],
+        "operationId" : "deleteSite",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSite-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/site/{SupplierSiteId}/bankaccount/{PayeeId}" : {
+      "get" : {
+        "summary" : "Get Supplier Site Bank Details",
+        "description" : "Get bank accounts associated to a supplier site for a supplier",
+        "tags" : [ "Supplier Site Bank Detail" ],
+        "operationId" : "getSupplierSiteBankDetails",
+        "parameters" : [ {
+          "name" : "PayeeId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierSiteId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierSiteBankDetails-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact" : {
+      "post" : {
+        "summary" : "Create Contact",
+        "description" : "Create new contact for a supplier",
+        "tags" : [ "Supplier Contact" ],
+        "operationId" : "createContact",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateContact-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateContact-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}" : {
+      "patch" : {
+        "summary" : "Update Contact",
+        "description" : "Update an existing contact for a supplier",
+        "tags" : [ "Supplier Contact" ],
+        "operationId" : "updateSupplierContacts",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierContacts-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierContacts-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Contact",
+        "description" : "De-activate an existing contact for a supplier",
+        "tags" : [ "Supplier Contact" ],
+        "operationId" : "deleteContact",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteContact-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/taxProfile" : {
+      "get" : {
+        "summary" : "Get Supplier Tax Profile",
+        "description" : "Get tax profile information stored at supplier profile level for a supplier",
+        "tags" : [ "Supplier Tax Profile" ],
+        "operationId" : "getSupplierTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/profile" : {
+      "patch" : {
+        "summary" : "Update Supplier Profile",
+        "description" : "Update existing supplier profile information for a supplier",
+        "tags" : [ "Supplier Profile" ],
+        "operationId" : "updateSupplier",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplier-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplier-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierPartyId}/addresse/{AddressName}" : {
+      "get" : {
+        "summary" : "Get Supplier Address Tax Profile",
+        "description" : "Get tax profile information against a supplier address for a supplier",
+        "tags" : [ "Supplier Address Tax Profile" ],
+        "operationId" : "getSupplierAddressTaxProfile",
+        "parameters" : [ {
+          "name" : "AddressName",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "SupplierPartyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetSupplierAddressTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "A sample description of the Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse" : {
+      "post" : {
+        "summary" : "Create Address",
+        "description" : "Create new address for a supplier",
+        "tags" : [ "Supplier Address" ],
+        "operationId" : "createAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Reponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse/{SupplierAddressId}" : {
+      "patch" : {
+        "summary" : "Update Supplier Address",
+        "description" : "Update an existing address for a supplier",
+        "tags" : [ "Supplier Address" ],
+        "operationId" : "updateSupplierAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Reponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete Address.",
+        "description" : "De-activate a supplier address for a supplier",
+        "tags" : [ "Supplier Address" ],
+        "operationId" : "deleteAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/addresse/{SupplierAddressId}/taxProfile/{PartyTaxProfileId}" : {
+      "patch" : {
+        "summary" : "Update Supplier Address Tax Profile",
+        "description" : "Update existing tax profile information against an existing address for a supplier",
+        "tags" : [ "Supplier Address Tax Profile" ],
+        "operationId" : "updateSupplierAddressTaxProfile",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierAddressId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "PartyTaxProfileId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateSupplierAddressTaxProfile-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UpdateSupplierAddressTaxProfile-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}/address/{SupplierContactAddressId}" : {
+      "delete" : {
+        "summary" : "Delete Supplier Contact Address",
+        "description" : "Delete a contact/address association for a supplier",
+        "tags" : [ "Supplier Contact Address" ],
+        "operationId" : "deleteSupplierContactAddress",
+        "parameters" : [ {
+          "name" : "SupplierContactAddressId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DeleteSupplierContactAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/site" : {
+      "post" : {
+        "summary" : "Create Site",
+        "description" : "Create new site and associated bank account for a supplier",
+        "tags" : [ "Supplier Site" ],
+        "operationId" : "createSite",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateSite-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateSite-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault  Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/supplier/{SupplierId}/contact/{SupplierContactId}/address" : {
+      "post" : {
+        "summary" : "Create Supplier Contact Address",
+        "description" : "Create a new contact/address association for a supplier",
+        "tags" : [ "Supplier Contact Address" ],
+        "operationId" : "createSupplierContactAddress",
+        "parameters" : [ {
+          "name" : "SupplierId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "SupplierContactId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateSupplierContactAddress-Request"
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateSupplierContactAddress-Response"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Fault Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/APIInvocationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CreateAddress-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateAddress-Request"
+      },
+      "CreateAddress-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateAddress-Response"
+      },
+      "DeleteSupplierContactAddress-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/DeleteSupplierContactAddress-Response"
+      },
+      "CreateSite-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateSite-Request"
+      },
+      "CreateSite-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateSite-Response"
+      },
+      "DeleteContact-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/DeleteContact-Response"
+      },
+      "CreateContact-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateContact-Request"
+      },
+      "CreateContact-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateContact-Response"
+      },
+      "DeleteSite-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/DeleteSite-Response"
+      },
+      "GetSupplier-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetSupplier-Response"
+      },
+      "CreateSupplierContactAddress-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateSupplierContactAddress-Request"
+      },
+      "CreateSupplierContactAddress-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/CreateSupplierContactAddress-Response"
+      },
+      "GetSupplierSitePaymentDetails-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetSupplierSitePaymentDetails-Response"
+      },
+      "UpdateSupplierSitePaymentDtls-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierSitePaymentDtls-Request"
+      },
+      "UpdateSupplierSitePaymentDtls-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierSitePaymentDtls-Response"
+      },
+      "UpdateSupplierTaxProfile-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierTaxProfile-Request"
+      },
+      "UpdateSupplierTaxProfile-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierTaxProfile-Response"
+      },
+      "UpdateSupplierSites-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierSites-Request"
+      },
+      "UpdateSupplierSites-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierSites-Response"
+      },
+      "GetSupplierSiteBankDetails-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetSupplierSiteBankDetails-Response"
+      },
+      "UpdateSupplierContacts-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierContacts-Request"
+      },
+      "UpdateSupplierContacts-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierContacts-Response"
+      },
+      "GetSupplierTaxProfile-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetSupplierTaxProfile-Response"
+      },
+      "UpdateSupplier-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplier-Request"
+      },
+      "UpdateSupplier-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplier-Response"
+      },
+      "GetSupplierAddressTaxProfile-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetSupplierAddressTaxProfile-Response"
+      },
+      "UpdateSupplierAddress-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierAddress-Request"
+      },
+      "UpdateSupplierAddress-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierAddress-Response"
+      },
+      "UpdateSupplierAddressTaxProfile-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierAddressTaxProfile-Request"
+      },
+      "UpdateSupplierAddressTaxProfile-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/UpdateSupplierAddressTaxProfile-Response"
+      },
+      "SupplierService-Request" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/SupplierService-Request"
+      },
+      "SupplierService-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/SupplierService-Response"
+      },
+      "GetInvoices-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/GetInvoices-Response"
+      },
+      "DeleteSupplierSiteBankAccount-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/DeleteSupplierSiteBankAccount-Response"
+      },
+      "DeleteAddress-Response" : {
+        "$ref" : "https://api.swaggerhub.com/domains/NHS-SBS/SSC_REST_API_Domain/1.0.0#/components/schemas/DeleteAddress-Response"
+      }
+    },
+    "securitySchemes" : {
+      "application" : {
+        "type" : "oauth2",
+        "flows" : {
+          "clientCredentials" : {
+            "tokenUrl" : "https://idcs-fbf7fdedd3cd4fa59b99c7e3f1028b7a.identity.oraclecloud.com/oauth2/v1/token",
+            "scopes" : {
+              "https://8A852861C5274E569218B12589776163.integration.ocp.oraclegovcloud.uk:443urn:opc:resource:consumer::all" : "OIC Integration"
+            }
+          }
+        }
+      }
+    }
+  }
+}
